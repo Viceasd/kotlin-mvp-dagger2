@@ -1,10 +1,7 @@
 package com.ogulcan.android.mvp.app.ui.list
 
 import com.ogulcan.android.mvp.app.api.ApiServiceInterface
-import com.ogulcan.android.mvp.app.models.Album
-import com.ogulcan.android.mvp.app.models.DetailsViewModel
-import com.ogulcan.android.mvp.app.models.Post
-import com.ogulcan.android.mvp.app.models.User
+import com.ogulcan.android.mvp.app.models.*
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -33,9 +30,9 @@ class ListPresenter: ListContract.Presenter {
     }
 
     override fun loadData() {
-        var subscribe = api.getPostList().subscribeOn(Schedulers.io())
+        var subscribe = api.getList().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ list: List<Post>? ->
+                .subscribe({ list: List<Indicador>? ->
                     view.showProgress(false)
                     view.loadDataSuccess(list!!.take(10))
                 }, { error ->

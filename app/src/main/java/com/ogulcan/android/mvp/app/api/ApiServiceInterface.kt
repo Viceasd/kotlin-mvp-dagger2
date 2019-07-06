@@ -1,6 +1,7 @@
 package com.ogulcan.android.mvp.app.api
 
 import com.ogulcan.android.mvp.app.models.Album
+import com.ogulcan.android.mvp.app.models.Indicador
 import com.ogulcan.android.mvp.app.models.Post
 import com.ogulcan.android.mvp.app.models.User
 import com.ogulcan.android.mvp.app.util.Constants
@@ -43,12 +44,15 @@ interface ApiServiceInterface {
     @DELETE("albums/{id}")
     fun deleteUser(@Path("id") id: Int)
 
+    @GET("api")
+    fun getList(): Observable<List<Indicador>>
+
     companion object Factory {
         fun create(): ApiServiceInterface {
             val retrofit = retrofit2.Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl(Constants.BASE_URL)
+                    .baseUrl(Constants.BASE_URL2)
                     .build()
 
             return retrofit.create(ApiServiceInterface::class.java)

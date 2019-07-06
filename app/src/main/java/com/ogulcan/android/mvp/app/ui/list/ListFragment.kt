@@ -13,6 +13,7 @@ import com.ogulcan.android.mvp.app.R
 import com.ogulcan.android.mvp.app.di.component.DaggerFragmentComponent
 import com.ogulcan.android.mvp.app.di.module.FragmentModule
 import com.ogulcan.android.mvp.app.models.DetailsViewModel
+import com.ogulcan.android.mvp.app.models.Indicador
 import com.ogulcan.android.mvp.app.models.Post
 import com.ogulcan.android.mvp.app.util.SwipeToDelete
 import kotlinx.android.synthetic.main.fragment_list.*
@@ -65,7 +66,7 @@ class ListFragment: Fragment(), ListContract.View, ListAdapter.onItemClickListen
         Log.e("Error", error)
     }
 
-    override fun loadDataSuccess(list: List<Post>) {
+    override fun loadDataSuccess(list: List<Indicador>) {
         var adapter = ListAdapter(activity, list.toMutableList(), this)
         recyclerView!!.setLayoutManager(LinearLayoutManager(activity))
         recyclerView!!.setAdapter(adapter)

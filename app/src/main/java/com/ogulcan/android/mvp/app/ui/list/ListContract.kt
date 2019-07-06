@@ -2,6 +2,7 @@ package com.ogulcan.android.mvp.app.ui.list
 
 import com.ogulcan.android.mvp.app.ui.base.BaseContract
 import com.ogulcan.android.mvp.app.models.DetailsViewModel
+import com.ogulcan.android.mvp.app.models.Indicador
 import com.ogulcan.android.mvp.app.models.Post
 
 /**
@@ -12,7 +13,7 @@ class ListContract {
     interface View: BaseContract.View {
         fun showProgress(show: Boolean)
         fun showErrorMessage(error: String)
-        fun loadDataSuccess(list: List<Post>)
+        fun loadDataSuccess(list: List<Indicador>)
         fun loadDataAllSuccess(model: DetailsViewModel)
     }
 

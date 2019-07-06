@@ -9,12 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.ogulcan.android.mvp.app.R
+import com.ogulcan.android.mvp.app.models.Indicador
 import com.ogulcan.android.mvp.app.models.Post
 
 /**
  * Created by ogulcan on 07/02/2018.
  */
-class ListAdapter(private val context: Context, private val list: MutableList<Post>,
+class ListAdapter(private val context: Context, private val list: MutableList<Indicador>,
                   fragment: Fragment): RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     private val listener: ListAdapter.onItemClickListener
@@ -32,11 +33,11 @@ class ListAdapter(private val context: Context, private val list: MutableList<Po
         var post = list[position]
 
         // holder!!.bind(post)
-        holder!!.title!!.setText(post.title)
-        holder.body!!.setText(post.body)
+        holder!!.title!!.setText("hola")
+        holder.body!!.setText("hola")
 
         holder.layout!!.setOnClickListener {
-            listener.itemDetail(post.id.toString()!!)
+            listener.itemDetail("holaaaa"!!)
         }
     }
 
