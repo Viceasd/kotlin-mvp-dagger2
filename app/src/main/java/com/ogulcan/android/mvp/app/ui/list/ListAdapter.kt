@@ -9,13 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.ogulcan.android.mvp.app.R
-import com.ogulcan.android.mvp.app.models.Indicador
 import com.ogulcan.android.mvp.app.models.Post
+import com.ogulcan.android.mvp.app.models.dto.IndicadorDto
 
 /**
  * Created by ogulcan on 07/02/2018.
  */
-class ListAdapter(private val context: Context, private val list: MutableList<Indicador>,
+class ListAdapter(private val context: Context, private val list: MutableList<IndicadorDto>,
                   fragment: Fragment): RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     private val listener: ListAdapter.onItemClickListener
@@ -33,11 +33,11 @@ class ListAdapter(private val context: Context, private val list: MutableList<In
         var post = list[position]
 
         // holder!!.bind(post)
-        holder!!.title!!.setText("hola")
-        holder.body!!.setText("hola")
+        holder!!.title!!.setText(post.nombre)
+        holder.body!!.setText(post.valor.toString())
 
         holder.layout!!.setOnClickListener {
-            listener.itemDetail("holaaaa"!!)
+            listener.itemDetail(post.nombre!!)
         }
     }
 
@@ -56,14 +56,14 @@ class ListAdapter(private val context: Context, private val list: MutableList<In
         val title = itemView.findViewById<TextView>(R.id.item_title)
         val body = itemView.findViewById<TextView>(R.id.item_body)
 
-        fun bind(item: Post) {
+        fun bind(item: IndicadorDto) {
             // title = item.post
             // body etc.
         }
     }
 
     interface onItemClickListener {
-        fun itemRemoveClick(post: Post)
+        fun itemRemoveClick(post: IndicadorDto)
         fun itemDetail(postId : String)
     }
 }

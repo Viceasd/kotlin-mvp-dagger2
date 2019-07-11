@@ -30,11 +30,11 @@ class ListPresenter: ListContract.Presenter {
     }
 
     override fun loadData() {
-        var subscribe = api.getList().subscribeOn(Schedulers.io())
+        var subscribe = api.getListIndicadores().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ list: List<Indicador>? ->
+                .subscribe({ list: Indicador? ->
                     view.showProgress(false)
-                    view.loadDataSuccess(list!!.take(10))
+                    view.loadDataSuccess(list!!)
                 }, { error ->
                     view.showProgress(false)
                     view.showErrorMessage(error.localizedMessage)
@@ -42,6 +42,8 @@ class ListPresenter: ListContract.Presenter {
 
         subscriptions.add(subscribe)
     }
+
+
 
     override fun loadDataAll() {
         var subscribe = Observable.zip(api.getPostList(), api.getUserList(), api.getAlbumList(),

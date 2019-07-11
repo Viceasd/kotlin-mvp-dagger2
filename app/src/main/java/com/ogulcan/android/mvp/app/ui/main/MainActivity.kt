@@ -5,10 +5,13 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.ogulcan.android.mvp.app.R
+import com.ogulcan.android.mvp.app.api.ApiServiceInterface
 import com.ogulcan.android.mvp.app.di.component.DaggerActivityComponent
 import com.ogulcan.android.mvp.app.di.module.ActivityModule
+import com.ogulcan.android.mvp.app.models.Indicador
 import com.ogulcan.android.mvp.app.ui.about.AboutFragment
 import com.ogulcan.android.mvp.app.ui.list.ListFragment
+import io.reactivex.Observable
 import javax.inject.Inject
 
 /**

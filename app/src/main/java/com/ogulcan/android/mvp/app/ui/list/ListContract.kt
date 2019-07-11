@@ -13,11 +13,12 @@ class ListContract {
     interface View: BaseContract.View {
         fun showProgress(show: Boolean)
         fun showErrorMessage(error: String)
-        fun loadDataSuccess(list: List<Indicador>)
+        fun loadDataSuccess(list: Indicador)
         fun loadDataAllSuccess(model: DetailsViewModel)
     }
 
     interface Presenter: BaseContract.Presenter<View> {
+      //  fun loadData()
         fun loadData()
         fun loadDataAll()
         fun deleteItem(item: Post)

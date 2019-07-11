@@ -15,6 +15,7 @@ import com.ogulcan.android.mvp.app.di.module.FragmentModule
 import com.ogulcan.android.mvp.app.models.DetailsViewModel
 import com.ogulcan.android.mvp.app.models.Indicador
 import com.ogulcan.android.mvp.app.models.Post
+import com.ogulcan.android.mvp.app.models.dto.IndicadorDto
 import com.ogulcan.android.mvp.app.util.SwipeToDelete
 import kotlinx.android.synthetic.main.fragment_list.*
 import javax.inject.Inject
@@ -27,6 +28,8 @@ class ListFragment: Fragment(), ListContract.View, ListAdapter.onItemClickListen
     @Inject lateinit var presenter: ListContract.Presenter
 
     private lateinit var rootView: View
+
+    private var indicadorList = ArrayList<IndicadorDto>()
 
     fun newInstance(): ListFragment {
         return ListFragment()
@@ -66,8 +69,9 @@ class ListFragment: Fragment(), ListContract.View, ListAdapter.onItemClickListen
         Log.e("Error", error)
     }
 
-    override fun loadDataSuccess(list: List<Indicador>) {
-        var adapter = ListAdapter(activity, list.toMutableList(), this)
+    override fun loadDataSuccess(list: Indicador) {
+        prepareListIndicador(list) 
+        var adapter = ListAdapter(activity, indicadorList, this)
         recyclerView!!.setLayoutManager(LinearLayoutManager(activity))
         recyclerView!!.setAdapter(adapter)
 
@@ -86,7 +90,7 @@ class ListFragment: Fragment(), ListContract.View, ListAdapter.onItemClickListen
         print(model.toJson())
     }
 
-    override fun itemRemoveClick(post: Post) {
+    override fun itemRemoveClick(post: IndicadorDto) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -108,5 +112,31 @@ class ListFragment: Fragment(), ListContract.View, ListAdapter.onItemClickListen
 
     companion object {
         val TAG: String = "ListFragment"
+    }
+    fun prepareListIndicador(listaIndicador : Indicador?){
+        var indicador : IndicadorDto = IndicadorDto(listaIndicador!!.bitcoin.nombre,listaIndicador!!.bitcoin.valor.toString())
+        indicadorList.add(indicador)
+        indicador= IndicadorDto(listaIndicador.dolar.nombre,listaIndicador.dolar.valor.toString())
+        indicadorList.add(indicador)
+        indicador= IndicadorDto(listaIndicador.dolar_intercambio.nombre,listaIndicador.dolar_intercambio.valor.toString())
+        indicadorList.add(indicador)
+        indicador= IndicadorDto(listaIndicador.bitcoin.nombre,listaIndicador.bitcoin.valor.toString())
+        indicadorList.add(indicador)
+        indicador= IndicadorDto(listaIndicador.euro.nombre,listaIndicador.euro.valor.toString())
+        indicadorList.add(indicador)
+        indicador= IndicadorDto(listaIndicador.imacec.nombre,listaIndicador.imacec.valor.toString())
+        indicadorList.add(indicador)
+        indicador= IndicadorDto(listaIndicador.ipc.nombre,listaIndicador.ipc.valor.toString())
+        indicadorList.add(indicador)
+        indicador= IndicadorDto(listaIndicador.ivp.nombre,listaIndicador.ivp.valor.toString())
+        indicadorList.add(indicador)
+        indicador= IndicadorDto(listaIndicador.libra_cobre.nombre,listaIndicador.libra_cobre.valor.toString())
+        indicadorList.add(indicador)
+        indicador= IndicadorDto(listaIndicador.tpm.nombre,listaIndicador.tpm.valor.toString())
+        indicadorList.add(indicador)
+        indicador= IndicadorDto(listaIndicador.tasa_desempleo.nombre,listaIndicador.tasa_desempleo.valor.toString())
+        indicadorList.add(indicador)
+        indicador= IndicadorDto(listaIndicador.utm.nombre,listaIndicador.utm.valor.toString())
+        indicadorList.add(indicador)
     }
 }
