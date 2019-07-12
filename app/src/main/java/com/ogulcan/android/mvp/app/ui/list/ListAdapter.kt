@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.ogulcan.android.mvp.app.R
+import com.ogulcan.android.mvp.app.models.Indicador
 import com.ogulcan.android.mvp.app.models.Post
 import com.ogulcan.android.mvp.app.models.dto.IndicadorDto
 
@@ -16,7 +17,8 @@ import com.ogulcan.android.mvp.app.models.dto.IndicadorDto
  * Created by ogulcan on 07/02/2018.
  */
 class ListAdapter(private val context: Context, private val list: MutableList<IndicadorDto>,
-                  fragment: Fragment): RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+                  private val indicador: Indicador, fragment: Fragment)
+                  : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     private val listener: ListAdapter.onItemClickListener
 
@@ -34,10 +36,10 @@ class ListAdapter(private val context: Context, private val list: MutableList<In
 
         // holder!!.bind(post)
         holder!!.title!!.setText(post.nombre)
-        holder.body!!.setText(post.valor.toString())
+        holder.body!!.setText(post.valor)
 
         holder.layout!!.setOnClickListener {
-            listener.itemDetail(post.nombre!!)
+            listener.itemDetail(post.id!!,indicador)
         }
     }
 
@@ -64,6 +66,6 @@ class ListAdapter(private val context: Context, private val list: MutableList<In
 
     interface onItemClickListener {
         fun itemRemoveClick(post: IndicadorDto)
-        fun itemDetail(postId : String)
+        fun itemDetail(postId : String,indicador: Indicador)
     }
 }
