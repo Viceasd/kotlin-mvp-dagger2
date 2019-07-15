@@ -9,6 +9,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.ogulcan.android.mvp.app.di.component.DaggerFragmentComponent
 import com.ogulcan.android.mvp.app.di.module.FragmentModule
 import com.ogulcan.android.mvp.app.models.DetailsViewModel
@@ -111,7 +113,7 @@ class ListFragment: Fragment(), ListContract.View, ListAdapter.onItemClickListen
 
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(recyclerView)
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private fun injectDependency() {
@@ -171,44 +173,14 @@ class ListFragment: Fragment(), ListContract.View, ListAdapter.onItemClickListen
         indicadorList.add(indicador)
     }
     fun prepareListDetalle(listaIndicador : Indicador?, postId: String){
-
-        var indicador : IndicadorDto = IndicadorDto(listaIndicador!!.bitcoin.nombre,
-                listaIndicador!!.bitcoin.valor.toString(),listaIndicador!!.bitcoin.javaClass.simpleName)
-        indicadorList.add(indicador)
-        indicador= IndicadorDto(listaIndicador.dolar.nombre,listaIndicador.dolar.valor.toString(),
-                listaIndicador.dolar.javaClass.simpleName)
-        indicadorList.add(indicador)
-        indicador= IndicadorDto(listaIndicador.dolar_intercambio.nombre,
-                listaIndicador.dolar_intercambio.valor.toString(),
-                listaIndicador.dolar_intercambio.javaClass.simpleName)
-        indicadorList.add(indicador)
-        indicador= IndicadorDto(listaIndicador.uf.nombre,listaIndicador.uf.valor.toString(),
-                listaIndicador.uf.javaClass.simpleName)
-        indicadorList.add(indicador)
-        indicador= IndicadorDto(listaIndicador.euro.nombre,listaIndicador.euro.valor.toString(),
-                listaIndicador.euro.javaClass.simpleName)
-        indicadorList.add(indicador)
-        indicador= IndicadorDto(listaIndicador.imacec.nombre,listaIndicador.imacec.valor.toString(),
-                listaIndicador.imacec.javaClass.simpleName)
-        indicadorList.add(indicador)
-        indicador= IndicadorDto(listaIndicador.ipc.nombre,listaIndicador.ipc.valor.toString(),
-                listaIndicador.ipc.javaClass.simpleName)
-        indicadorList.add(indicador)
-        indicador= IndicadorDto(listaIndicador.ivp.nombre,listaIndicador.ivp.valor.toString(),
-                listaIndicador.ivp.javaClass.simpleName)
-        indicadorList.add(indicador)
-        indicador= IndicadorDto(listaIndicador.libra_cobre.nombre,
-                listaIndicador.libra_cobre.valor.toString(),listaIndicador.libra_cobre.javaClass.simpleName)
-        indicadorList.add(indicador)
-        indicador= IndicadorDto(listaIndicador.tpm.nombre,listaIndicador.tpm.valor.toString(),
-                listaIndicador.tpm.javaClass.simpleName)
-        indicadorList.add(indicador)
-        indicador= IndicadorDto(listaIndicador.tasa_desempleo.nombre,
-                listaIndicador.tasa_desempleo.valor.toString(),
-                listaIndicador.tasa_desempleo.javaClass.simpleName)
-        indicadorList.add(indicador)
-        indicador= IndicadorDto(listaIndicador.utm.nombre,listaIndicador.utm.valor.toString(),
-                listaIndicador.utm.javaClass.simpleName)
-        indicadorList.add(indicador)
+        indicadorList.clear()
+        val gson = Gson()
+        val jsonElement = gson.toJsonTree(listaIndicador,  Indicador::class.java)
+        val jsonObject = jsonElement as JsonObject
+        val entrySet =  jsonObject.get("dolar").asJsonObject.entrySet()
+        for ((key) in entrySet) {
+            var indicador : IndicadorDto = IndicadorDto((jsonObject.get("dolar").asJsonObject).get(key).asString,"","")
+            indicadorList.add(indicador)
+        }
     }
 }

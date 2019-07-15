@@ -20,6 +20,7 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
+        assertEquals("com.jibble.test", appContext.packageName)
         assertEquals("com.ogulcan.android.mvp.test", appContext.packageName)
     }
 }
